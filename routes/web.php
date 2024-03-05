@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Controllers
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,14 +24,16 @@ Route::get('/', [MainController::class, 'index'])->name('home');   // <--- Che v
 
 Route::get('/chi-siamo', [MainController::class, 'about'])->name('about');
 
+Route::resource('comics', BookController::class);
+
 /*
     Questa istruzione definisce 7 rotte (in quest'ordine - perché è importante l'ordine delle rotte?):
-    - GET       /books                  -> books.index
-    - POST      /books                  -> books.store
-    - GET       /books/create           -> books.create
-    - GET       /books/{book}           -> books.show
-    - PUT       /books/{book}           -> books.update
-    - DELETE    /books/{book}           -> books.destroy
-    - GET       /books/{book}/edit      -> books.edit
+    - GET       /comic                  -> comics.index
+    - POST      /comic                  -> comics.store
+    - GET       /comic/create           -> comics.create
+    - GET       /comic/{book}           -> comics.show
+    - PUT       /comic/{book}           -> comics.update
+    - DELETE    /comic/{book}           -> comics.destroy
+    - GET       /comic/{book}/edit      -> comics.edit
 */
 Route::resource('books', BookController::class);
