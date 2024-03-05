@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Adimn;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Comic;
+
 class ComicController extends Controller
 {
     /**
@@ -12,7 +14,8 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        $comics = Comic::all();
+        return view('comics.index'.compact('comics'));
     }
 
     /**
@@ -20,7 +23,21 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        $newComicData = $request->all();
+        $comic = new Comic();
+        $comic->title = $newComicData['title'];
+        $comic->description = $newComicData['description'];
+        $comic->thumb = $newComicData['thumb'];
+        $comic->price = $newComicData['price'];
+        $comic->series = $newComicData['series'];
+        $comic->sale_date = $newComicData['sale_date'];
+        $comic->type = $newComicData['type'];
+        $explodeArtists = explode(',',$newComicData['artisan']);
+        $comic->artists = json_encode($explodeArtists);
+        $explodeWriters = explode('|',$newComicData['artisan']);
+        $comic->writers = str_replace(',','|',$newComicData['writers']);
+        $comic->save();
+        return view('comics.create');
     }
 
     /**
@@ -28,7 +45,7 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -36,7 +53,8 @@ class ComicController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $comic = Comic::findorFail();
+        return view ('comics.show', compact('comic'));
     }
 
     /**

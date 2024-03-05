@@ -8,7 +8,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        return redirect()->route('comics.index');
+        
         $firstName = 'Gino';
         $lastName = 'Paoli';
 
